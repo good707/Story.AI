@@ -62,7 +62,7 @@ class echoHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
 def main(answer=None):
-    PORT = 8000
+    PORT = 4953
     server= HTTPServer(('', PORT), echoHandler)
     print('server running on port 8000')
     server.serve_forever()
