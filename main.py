@@ -75,7 +75,7 @@ def main(answer=None):
     # Display the Groq logo
     spacer, col = st.columns([5, 1])
     # The title and greeting message of the Streamlit application
-    st.title("Story Telling AI :red[P]owered :red[b]y :red[L]Lama")
+    st.title(":red[S]tory :red[T]elling :red[A]I")
     st.write("_What will you generate today?_")
 
     system_prompt = "be a story generating ai only"
