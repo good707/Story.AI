@@ -1,0 +1,7 @@
+groq==0.8.0
+Kivy==2.3.0
+langchain==0.2.3
+langchain_core==0.2.5
+langchain_groq==0.1.5
+Requests==2.32.3
+streamlit==1.35.0
