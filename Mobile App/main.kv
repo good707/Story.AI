@@ -1,0 +1,83 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<UserInput>:
+    size_hint_y: None
+    height: "90dp"
+    size_hint_x: 0.4
+    adaptive_height: True
+    pos_hint: {'center_x': 0.8}
+    MDCard:
+        md_bg_color: app.theme_cls.primary_color
+        radius: [25, 25, 25, 0]
+        MDLabel:
+            text: root.text
+            color: 1, 1, 1, 1
+            font_size: root.font_size
+            valign: "middle"
+            halign: "center"
+
+<BotResponse>:
+    size_hint_y: None
+    height: "90dp"
+    size_hint_x: 0.4
+    adaptive_height: True
+    pos_hint: {'center_x': 0.2}
+    MDCard:
+        md_bg_color: get_color_from_hex("#474747")
+        radius: [25, 25, 0, 25]
+        MDLabel:
+            text: root.text
+            color: 1, 1, 1, 1
+            font_size: root.font_size
+            valign: "middle"
+            halign: "center"
+
+<ChatScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+
+        MDTopAppBar:
+            title: "Donna"
+            left_action_items: [["robot"]]
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: 40
+
+            MDLabel:
+                text: "Hello, you can ask me anything! I'm here to help."
+                color: 0, 0, 0, .5
+                font_style: "Caption"
+                valign: "middle"
+                halign: "center"
+
+        ScrollView:
+            MDBoxLayout:
+                id: chat_area
+                adaptive_height: True
+                orientation: "vertical"
+                padding: dp(20)
+                spacing: dp(12)
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: 50
+            padding: dp(40)
+            spacing: dp(10)
+
+            MDTextField:
+                id: message
+                hint_text: "Enter your message here..."
+                font_style: "Caption"
+                multiline: True
+                mode: "round"
+                max_text_length: 150
+                size_hint_x: 0.85
+
+            MDFillRoundFlatIconButton:
+                icon: "send"
+                text: "Send"
+                size_hint_x: 0.15
+                on_press: root.send_message()
+                on_release: root.bot_response()
