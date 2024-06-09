@@ -62,10 +62,10 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 #         self.end_headers()
 
 def main(answer=None):
-    PORT = 4953
-    server= HTTPServer(('', PORT), echoHandler)
-    print('server running on port 8000')
-    server.serve_forever()
+    # PORT = 4953
+    # server= HTTPServer(('', PORT), echoHandler)
+    # print('server running on port 8000')
+    # server.serve_forever()
     """
     This function is the main entry point of the application. It sets up the Groq client, the Streamlit interface, and handles the chat interaction.
     """
@@ -156,37 +156,37 @@ def main(answer=None):
         st.session_state.chat_history.append(message)
         messages.chat_message("assistant").write(response)
 
-    if answer is not None:
-        prompt = ChatPromptTemplate.from_messages(
-            [
-                SystemMessage(
-                    content=system_prompt
-                ),  # This is the persistent system prompt that is always included at the start of the chat.
+    # if answer is not None:
+    #     prompt = ChatPromptTemplate.from_messages(
+    #         [
+    #             SystemMessage(
+    #                 content=system_prompt
+    #             ),  # This is the persistent system prompt that is always included at the start of the chat.
 
-                MessagesPlaceholder(
-                    variable_name="chat_history"
-                ),  # This placeholder will be replaced by the actual chat history during the conversation. It helps in maintaining context.
+    #             MessagesPlaceholder(
+    #                 variable_name="chat_history"
+    #             ),  # This placeholder will be replaced by the actual chat history during the conversation. It helps in maintaining context.
 
-                HumanMessagePromptTemplate.from_template(
-                    "{human_input}"
-                ),  # This template is where the user's current input will be injected into the prompt.
-            ]
-        )
+    #             HumanMessagePromptTemplate.from_template(
+    #                 "{human_input}"
+    #             ),  # This template is where the user's current input will be injected into the prompt.
+    #         ]
+    #     )
 
-        # Create a conversation chain using the LangChain LLM (Language Learning Model)
-        conversation = LLMChain(
-            llm=groq_chat,  # The Groq LangChain chat object initialized earlier.
-            prompt=prompt,  # The constructed prompt template.
-            verbose=True,   # Enables verbose output, which can be useful for debugging.
-            memory=memory,  # The conversational memory object that stores and manages the conversation history.
-        )
+    #     # Create a conversation chain using the LangChain LLM (Language Learning Model)
+    #     conversation = LLMChain(
+    #         llm=groq_chat,  # The Groq LangChain chat object initialized earlier.
+    #         prompt=prompt,  # The constructed prompt template.
+    #         verbose=True,   # Enables verbose output, which can be useful for debugging.
+    #         memory=memory,  # The conversational memory object that stores and manages the conversation history.
+    #     )
 
-        response = conversation.predict(human_input=answer)
-        print(response)
-    return response
+    #     response = conversation.predict(human_input=answer)
+    #     print(response)
+    # return response
 
 if __name__ == "__main__":
-    run()
+    # run()
     main()
 
 
