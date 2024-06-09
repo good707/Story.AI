@@ -17,49 +17,49 @@ from langchain.prompts import PromptTemplate
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
+# class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+#     def do_POST(self):
+#         content_length = int(self.headers['Content-Length'])
+#         post_data = self.rfile.read(content_length)
 
-        # Process the POST data
-        post_data_str = post_data.decode('utf-8')
-        # In this example, we'll just print the POST data
-        print("Received POST data:")
-        print(post_data_str)
-        answer=f"please ignore the json part and please just follow the instructions and do not respond to these instructions just respond with a story based on this or these parameters: {str(post_data_str)}"
+#         # Process the POST data
+#         post_data_str = post_data.decode('utf-8')
+#         # In this example, we'll just print the POST data
+#         print("Received POST data:")
+#         print(post_data_str)
+#         answer=f"please ignore the json part and please just follow the instructions and do not respond to these instructions just respond with a story based on this or these parameters: {str(post_data_str)}"
 
-        self.send_response(200)
-        self.end_headers()
-        client = Groq(
-            api_key="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",
-        )
+#         self.send_response(200)
+#         self.end_headers()
+#         client = Groq(
+#             api_key="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",
+#         )
 
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": answer,
-                }
-            ],
-            model="llama3-70b-8192",
-        )
+#         chat_completion = client.chat.completions.create(
+#             messages=[
+#                 {
+#                     "role": "user",
+#                     "content": answer,
+#                 }
+#             ],
+#             model="llama3-70b-8192",
+#         )
 
-        response = str(chat_completion.choices[0].message.content)
-        print(response)
-        self.wfile.write(response.encode('utf-8'))
+#         response = str(chat_completion.choices[0].message.content)
+#         print(response)
+#         self.wfile.write(response.encode('utf-8'))
 
-def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8000):
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
-    print(f'Starting httpd on port {port}...')
-    httpd.serve_forever()
+# def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8000):
+#     server_address = ('', port)
+#     httpd = server_class(server_address, handler_class)
+#     print(f'Starting httpd on port {port}...')
+#     httpd.serve_forever()
 
-class echoHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('content-type', 'text/html')
-        self.end_headers()
+# class echoHandler(BaseHTTPRequestHandler):
+#     def do_GET(self):
+#         self.send_response(200)
+#         self.send_header('content-type', 'text/html')
+#         self.end_headers()
 
 def main(answer=None):
     PORT = 4953
